@@ -1,0 +1,29 @@
+{
+  "id": "#{id}",
+  "name": "#{name}",
+  "version": "0.1.0",
+  "author": "#{author}",
+  "description": [
+    "#{description}"
+  ],
+  "category": "Gameplay",
+  "gameVersion": "1.12.2",
+  "platform": "Quest",
+  "components": [
+    {
+      "type": "HookMod",
+      "installAction": {
+        "installLibraryFile": "lib#{id}_0_1_0.so"
+      },
+      "uninstallAction": {
+        "removeLibraryFile": "lib#{id}_0_1_0.so"
+      }
+    },
+    {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "libbeatsaber-hook_0_8_4.so"
+      }
+    }
+  ]
+}
