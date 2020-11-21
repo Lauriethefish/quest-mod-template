@@ -13,10 +13,10 @@
     {
       "type": "HookMod",
       "installAction": {
-        "installLibraryFile": "lib#{id}_0_1_0.so"
+        "installLibraryFile": "lib#{id}.so"
       },
       "uninstallAction": {
-        "removeLibraryFile": "lib#{id}_0_1_0.so"
+        "removeLibraryFile": "lib#{id}.so"
       }
     },
     {
