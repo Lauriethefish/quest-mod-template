@@ -7,7 +7,7 @@
     "#{description}"
   ],
   "category": "Gameplay",
-  "gameVersion": "1.12.2",
+  "gameVersion": "1.13.0",
   "platform": "Quest",
   "components": [
     {
