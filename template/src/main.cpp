@@ -10,8 +10,8 @@ Configuration& getConfig() {
 }
 
 // Returns a logger, useful for printing debug messages
-const Logger& getLogger() {
-    static const Logger logger(modInfo);
+Logger& getLogger() {
+    static Logger logger(modInfo);
     return logger;
 }
 
