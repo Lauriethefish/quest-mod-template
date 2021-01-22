@@ -11,8 +11,8 @@ Configuration& getConfig() {
 
 // Returns a logger, useful for printing debug messages
 Logger& getLogger() {
-    static Logger logger(modInfo);
-    return logger;
+    static Logger* logger = new Logger(modInfo);
+    return *logger;
 }
 
 // Called at the early stages of game loading
