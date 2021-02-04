@@ -16,8 +16,6 @@ include_directories(shared)
 include_directories(extern/libil2cpp/il2cpp/libil2cpp)
 # Uncomment these if you use these libraries
 # include_directories(extern/codegen/include)
-# include_directories(extern/beatsaber-hook/shared)
-# include_directories(extern/modloader/shared)
 include_directories(${CMAKE_ANDROID_NDK})
 include_directories(.)
 
