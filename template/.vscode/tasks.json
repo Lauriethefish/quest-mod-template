@@ -74,9 +74,21 @@
         },
         {
             "label": "Start logging",
-            "detail": "Records a log to log.txt using adb logcat",
+            "detail": "Begin logging from the Quest to the console",
             "type": "shell",
-            "command": "./startlogging.bat"
+            "command": "./start-logging.ps1",
+            "windows": {
+                "command": "./start-logging.ps1"
+            }
+        },
+        {
+            "label": "Restart Beat Saber",
+            "detail": "Force-quits and restarts Beat Saber on the Quest",
+            "type": "shell",
+            "command": "./start-logging.ps1",
+            "windows": {
+                "command": "./start-logging.ps1"
+            }
         }
     ]
 }
