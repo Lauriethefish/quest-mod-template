@@ -2,8 +2,8 @@
 {
     "_QPVersion": "0.1.0",
     "name": "#{name}",
-    "id": "{#id}",
-    "author": "{#author}",
+    "id": "#{id}",
+    "author": "#{author}",
     "version": "0.1.0",
     "packageId": "com.beatgames.beatsaber",
     "packageVersion": "1.14.0",
