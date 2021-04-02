@@ -1,3 +1,3 @@
-Remove-Item template.zip
-Compress-Archive template/* template.zip
+Remove-Item quest-mod-template.zip -ErrorAction Ignore
+Compress-Archive template/* quest-mod-template.zip
 Write-Output "Template saved to template.zip"
