@@ -46,25 +46,11 @@
         },
         {
             "label": "QMOD Build",
-            "detail": "Builds a .qmod to be installed into QuestPatcher",
+            "detail": "Builds a .qmod to be installed into BMBF or QuestPatcher",
             "type": "shell",
-            "command": "./buildQP.ps1",
+            "command": "./buildQMOD.ps1",
             "windows": {
-                "command": "./buildQP.ps1"
-            },
-            "args": [],
-            "group": "build",
-            "options": {
-                "env": {}
-            }
-        },
-        {
-            "label": "BMBF Build",
-            "detail": "Builds a .zip to be uploaded into BMBF",
-            "type": "shell",
-            "command": "./buildBMBF.ps1",
-            "windows": {
-                "command": "./buildBMBF.ps1"
+                "command": "./buildQMOD.ps1"
             },
             "args": [],
             "group": "build",
