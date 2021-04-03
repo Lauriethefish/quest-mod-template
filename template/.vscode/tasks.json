@@ -68,6 +68,15 @@
             }
         },
         {
+            "label": "Start logging to file",
+            "detail": "Begin logging from the Quest to the console and saving output to a file 'logcat.log'",
+            "type": "shell",
+            "command": "./start-logging.ps1 --file",
+            "windows": {
+                "command": "./start-logging.ps1 --file"
+            }
+        },
+        {
             "label": "Restart Beat Saber",
             "detail": "Force-quits and restarts Beat Saber on the Quest",
             "type": "shell",
