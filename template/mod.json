@@ -8,7 +8,6 @@
     "packageId": "com.beatgames.beatsaber",
     "packageVersion": "1.14.0",
     "description": "#{description}",
-    "type": "Gameplay",
     "modFiles": [
         "lib#{id}.so"
     ],
