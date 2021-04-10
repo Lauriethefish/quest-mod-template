@@ -1,6 +1,6 @@
 
 {
-    "_QPVersion": "0.1.0",
+    "_QPVersion": "0.1.1",
     "name": "#{name}",
     "id": "#{id}",
     "author": "#{author}",
