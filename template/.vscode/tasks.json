@@ -16,8 +16,8 @@
             }
         },
         {
-            "label": "PowerShell Build",
-            "detail": "Builds the library using PowerShell (recommended)",
+            "label": "Powershell Build",
+            "detail": "Builds the library using Powershell (recommended)",
             "type": "shell",
             "command": "./build.ps1",
             "windows": {
@@ -32,7 +32,7 @@
             }
         },
         {
-            "label": "PowerShell Build and Copy",
+            "label": "Powershell Build and Copy",
             "detail": "Builds and copies the library to the Quest using ADB and force-quits Beat Saber",
             "type": "shell",
             "command": "./copy.ps1",
