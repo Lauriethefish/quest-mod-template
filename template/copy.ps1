@@ -47,10 +47,12 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($useDebug -eq $true) {
-    & adb push build/debug_lib#{id}.so /sdcard/Android/data/com.beatgames.beatsaber/files/mods/lib#{id}.so
+    $fileName = Get-ChildItem debug_lib*.so -Path "build/" -Name
 } else {
-    & adb push build/lib#{id}.so /sdcard/Android/data/com.beatgames.beatsaber/files/mods/lib#{id}.so
+    $fileName = Get-ChildItem lib*.so -Path "build/" -Name
 }
+
+& adb push build/$fileName /sdcard/Android/data/com.beatgames.beatsaber/files/mods/$fileName
 
 & $PSScriptRoot/restart-game.ps1
 
