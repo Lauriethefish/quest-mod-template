@@ -54,6 +54,7 @@ Android.mk.backup
 mod.json
 qpm.shared.json
 qpm_defines.cmake
+![Cc][Mm]ake[Ll]ists.txt
 
 # CMake stuff
 [Bb]uild/
