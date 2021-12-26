@@ -1,0 +1,34 @@
+{
+	"sharedDir": "shared",
+	"dependenciesDir": "extern",
+	"info": {
+		"name": "#{name}",
+		"id": "#{id}",
+		"version": "0.1.0",
+		"url": null,
+		"additionalData": {
+			"overrideSoName": "lib#{id}.so"
+		}
+	},
+	"dependencies": [
+		{
+			"id": "beatsaber-hook",
+			"versionRange": "=2.3.2",
+			"additionalData": {
+				"extraFiles": [
+					"src/inline-hook"
+				]
+			}
+		},
+		{
+			"id": "modloader",
+			"versionRange": "=1.2.3",
+			"additionalData": {
+				
+			}
+		}
+	],
+	"additionalData": {
+		
+	}
+}
