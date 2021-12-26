@@ -12,7 +12,8 @@
         "${workspaceFolder}/shared",
         "${workspaceFolder}/include",
         "${workspaceFolder}/extern/includes/**",
-        "${workspaceFolder}/extern/libil2cpp/il2cpp/libil2cpp"
+        "${workspaceFolder}/extern/libil2cpp/il2cpp/libil2cpp",
+        "#{ndkpath}/**"
       ],
       "name": "Quest",
       "cStandard": "c11",
