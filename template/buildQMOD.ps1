@@ -33,10 +33,6 @@ if ($LASTEXITCODE -ne 0) {
     exit
 }
 
-echo "Creating mod.json"
-
-& "qpm-rust" qmod build
-
 echo "Creating qmod from mod.json"
 
 $mod = "./mod.json"
