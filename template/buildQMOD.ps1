@@ -1,8 +1,24 @@
 Param(
-    [String]$qmodname="",
+    [String] $qmodname="",
+
     [Parameter(Mandatory=$false)]
-    [Switch]$clean
+    [Switch] $clean,
+
+    [Parameter(Mandatory=$false)]
+    [Switch] $help
 )
+
+if ($help -eq $true) {
+    echo "`"BuildQmod <qmodName>`" - Copiles your mod into a `".so`" or a `".a`" library"
+    echo "`n-- Parameters --`n"
+    echo "qmodName `t The file name of your qmod"
+
+    echo "`n-- Arguments --`n"
+
+    echo "-Clean `t`t Performs a clean build on both your library and the qmod"
+
+    exit
+}
 
 if ($qmodName -eq "")
 {
