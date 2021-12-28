@@ -4,6 +4,13 @@ include(qpm_defines.cmake)
 # override mod id
 set(MOD_ID "#{id}")
 
+# Enable link time optimization
+# In my experience, this can be highly unstable but it nets a huge size optimization and likely performance
+# However, the instability was seen using Android.mk/ndk-build builds. With Ninja + CMake, this problem seems to have been solved.
+# As always, test thoroughly
+# - Fern
+# set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 cmake_minimum_required(VERSION 3.21)
 project(${COMPILE_ID})
 
