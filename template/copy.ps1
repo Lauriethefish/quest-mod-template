@@ -47,7 +47,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($useDebug -eq $true) {
-    $fileName = Get-ChildItem debug_lib*.so -Path "build/" -Name
+    $fileName = Get-ChildItem lib*.so -Path "build/debug" -Name
 } else {
     $fileName = Get-ChildItem lib*.so -Path "build/" -Name
 }
