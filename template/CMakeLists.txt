@@ -1,6 +1,9 @@
 # include some defines automatically made by qpm
 include(qpm_defines.cmake)
 
+# override mod id
+set(MOD_ID "#{id}")
+
 cmake_minimum_required(VERSION 3.21)
 project(${COMPILE_ID})
 
