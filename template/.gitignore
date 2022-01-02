@@ -36,6 +36,9 @@
 !.vscode/tasks.json
 !.vscode/settings.json
 
+# Jetbrains IDEs
+.idea/
+
 # NDK stuff
 out/
 [Ll]ib/
