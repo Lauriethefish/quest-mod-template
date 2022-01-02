@@ -43,7 +43,7 @@ if ($help -eq $true) {
 
 if ($LASTEXITCODE -ne 0) {
     echo "Failed to build, exiting..."
-    exit
+    exit $LASTEXITCODE
 }
 
 if ($useDebug -eq $true) {

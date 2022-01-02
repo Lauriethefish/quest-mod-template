@@ -30,7 +30,7 @@ if ($qmodName -eq "")
 
 if ($LASTEXITCODE -ne 0) {
     echo "Failed to build, exiting..."
-    exit
+    exit $LASTEXITCODE
 }
 
 echo "Creating qmod from mod.json"
