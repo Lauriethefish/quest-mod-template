@@ -62,6 +62,3 @@ qpm_defines.cmake
 [Bb]uild/
 cmake-build-*/
 extern.cmake
-
-# Exclude the setup file so people dont accidentally run it
-setup-package.ps1
