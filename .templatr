@@ -8,6 +8,6 @@
     {"match": "#{id}", "prompt": "The ID of the mod"},
     {"match": "#{name}", "prompt": "The name of the mod"},
     {"match": "#{author}", "prompt": "The author of the mod"},
-    {"match": "#{description}", "prompt": "The description of the mod"},
+    {"match": "#{description}", "prompt": "The description of the mod"}
   ]
 }
