@@ -44,8 +44,6 @@ add_library(
 
 target_include_directories(${COMPILE_ID} PRIVATE .)
 
-target_include_directories(${COMPILE_ID} PRIVATE extern/includes/questui_components)
-
 # add src dir as include dir
 target_include_directories(${COMPILE_ID} PRIVATE ${SOURCE_DIR})
 # add include dir as include dir
