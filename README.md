@@ -10,7 +10,7 @@ A template for creating Beat Saber mods for the Oculus Quest.
 If you do not use Visual Studio Code, or do not have it installed you can use Templatr.
 
 Templatr requires NodeJS and NPM to be installed.
-It will download the repo and guide you through the creation of a quest mod and fi out all placeholders.
+It will download the repo and guide you through the creation of a quest mod and fill out all placeholders.
 
 
 ```bash
