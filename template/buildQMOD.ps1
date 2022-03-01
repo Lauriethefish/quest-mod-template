@@ -35,8 +35,19 @@ if ($LASTEXITCODE -ne 0) {
 
 echo "Creating qmod from mod.json"
 
+$schemaUrl = "https://raw.githubusercontent.com/Lauriethefish/QuestPatcher.QMod/main/QuestPatcher.QMod/Resources/qmod.schema.json"
+Invoke-WebRequest $schemaUrl -OutFile ./mod.schema.json
+
 $mod = "./mod.json"
-$modJson = Get-Content $mod -Raw | ConvertFrom-Json
+$schema = "./mod.schema.json"
+$modJsonRaw = Get-Content $mod -Raw
+$modJson = $modJsonRaw | ConvertFrom-Json
+$modSchemaRaw = Get-Content $schema -Raw
+
+echo "Validating mod.json..."
+$modJsonRaw | Test-Json -Schema $modSchemaRaw
+
+Remove-Item ./mod.schema.json
 
 $filelist = @($mod)
 
