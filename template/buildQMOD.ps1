@@ -45,7 +45,9 @@ $modJson = $modJsonRaw | ConvertFrom-Json
 $modSchemaRaw = Get-Content $schema -Raw
 
 echo "Validating mod.json..."
-$modJsonRaw | Test-Json -Schema $modSchemaRaw
+if(!($modJsonRaw | Test-Json -Schema $modSchemaRaw)) {
+    exit
+}
 
 Remove-Item ./mod.schema.json
 
