@@ -3,10 +3,7 @@ Param(
     [Switch] $clean,
 
     [Parameter(Mandatory=$false)]
-    [Switch] $help,
-
-    [Parameter(Mandatory=$false)]
-    [Switch]$release
+    [Switch] $help
 )
 
 if ($help -eq $true) {
@@ -14,7 +11,6 @@ if ($help -eq $true) {
     echo "`n-- Arguments --`n"
 
     echo "-Clean `t`t Deletes the `"build`" folder, so that the entire library is rebuilt"
-    echo "-release `t`t Generates a release build of your mod, otherwise it generates a debug build"
     exit
 }
 
@@ -33,16 +29,7 @@ if (($clean.IsPresent) -or (-not (Test-Path -Path "build")))
     $out = new-item -Path build -ItemType Directory
 } 
 
-$buildType = "Debug"
-if ($release.IsPresent) {
-    echo "Building release binary"
-    $buildType = "RelWithDebInfo"
-}
-else {
-    echo "Building debug binary"
-}
-
-& cmake -G "Ninja" -DCMAKE_BUILD_TYPE="$buildType" -B build
+& cmake -G "Ninja" -DCMAKE_BUILD_TYPE="RelWithDebInfo" -B build
 & cmake --build ./build
 $ExitCode = $LastExitCode
 exit $ExitCode

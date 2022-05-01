@@ -6,9 +6,6 @@ Param(
     [Switch] $log,
 
     [Parameter(Mandatory=$false)]
-    [Switch] $useDebug,
-
-    [Parameter(Mandatory=$false)]
     [Switch] $self,
 
     [Parameter(Mandatory=$false)]
@@ -29,7 +26,6 @@ if ($help -eq $true) {
     echo "`n-- Arguments --`n"
 
     echo "-Clean `t`t Performs a clean build (equvilant to running `"Build -clean`")"
-    echo "-UseDebug `t Copied the debug version of the mod to your quest"
     echo "-Log `t`t Logs Beat Saber using the `"Start-Logging`" command"
 
     echo "`n-- Logging Arguments --`n"
@@ -46,11 +42,9 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-if ($useDebug -eq $true) {
-    $fileName = Get-ChildItem lib*.so -Path "build/debug" -Name
-} else {
-    $fileName = Get-ChildItem lib*.so -Path "build/" -Name
-}
+
+$fileName = Get-ChildItem lib*.so -Path "build/" -Name
+
 
 & adb push build/$fileName /sdcard/Android/data/com.beatgames.beatsaber/files/mods/$fileName
 
