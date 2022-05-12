@@ -2,7 +2,7 @@
 include(qpm_defines.cmake)
 
 # override mod id
-set(MOD_ID "#{id}")
+set(ID "#{id}")
 
 # Enable link time optimization
 # In my experience, this can be highly unstable but it nets a huge size optimization and likely performance
@@ -13,6 +13,9 @@ set(MOD_ID "#{id}")
 
 cmake_minimum_required(VERSION 3.21)
 project(${COMPILE_ID})
+
+# export compile commands for significantly better intellisense
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # c++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -27,7 +30,7 @@ add_compile_options(-frtti -fexceptions)
 add_compile_options(-O3)
 # compile definitions used
 add_compile_definitions(VERSION=\"${MOD_VERSION}\")
-add_compile_definitions(MOD_ID=\"${MOD_ID}\")
+add_compile_definitions(ID=\"${ID}\")
 
 # recursively get all src files
 RECURSE_FILES(cpp_file_list ${SOURCE_DIR}/*.cpp)
