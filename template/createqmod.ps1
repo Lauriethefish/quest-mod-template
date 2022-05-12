@@ -15,6 +15,8 @@ if ($help -eq $true) {
     exit
 }
 
+$mod = "./mod.json"
+
 & $PSScriptRoot/validate-modjson.ps1
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
@@ -25,7 +27,7 @@ if ($qmodName -eq "") {
     $qmodName = $modJson.name
 }
 
-$filelist = @("./mod.json")
+$filelist = @("$mod)
 
 $cover = "./" + $modJson.coverImage
 if ((-not ($cover -eq "./")) -and (Test-Path $cover)) {

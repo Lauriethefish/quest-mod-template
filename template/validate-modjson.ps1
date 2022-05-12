@@ -16,7 +16,7 @@ if (-not (Test-Path -Path $mod)) {
 Write-Output "Creating qmod from mod.json"
 
 $psVersion = $PSVersionTable.PSVersion.Major
-if ($psVersion -ge 5) {
+if ($psVersion -ge 6) {
     $schemaUrl = "https://raw.githubusercontent.com/Lauriethefish/QuestPatcher.QMod/main/QuestPatcher.QMod/Resources/qmod.schema.json"
     Invoke-WebRequest $schemaUrl -OutFile ./mod.schema.json
 
