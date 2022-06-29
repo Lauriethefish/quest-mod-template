@@ -9,7 +9,7 @@ Param(
     [String] $custom="",
 
     [Parameter(Mandatory=$false)]
-    [Switch] $file,
+    [String] $file="",
 
     [Parameter(Mandatory=$false)]
     [Switch] $help,
@@ -20,45 +20,57 @@ Param(
 
 if ($help -eq $true) {
     if ($excludeHeader -eq $false) {
-        echo "`"Start-Logging`" - Logs Beat Saber using `"adb logcat`""
-        echo "`n-- Arguments --`n"
+        Write-Output "`"Start-Logging`" - Logs Beat Saber using `"adb logcat`""
+        Write-Output "`n-- Arguments --`n"
     }
 
-    echo "-Self `t`t Only Logs your mod and Crashes"
-    echo "-All `t`t Logs everything, including logs made by the Quest itself"
-    echo "-Custom `t Specify a specific logging pattern, e.g `"custom-types|questui`""
-    echo "`t`t NOTE: The paterent `"AndriodRuntime|CRASH`" is always appended to a custom pattern"
-    echo "-File `t`t Saves the output of the log to `"logcat.log`""
+    Write-Output "-Self `t`t Only Logs your mod and Crashes"
+    Write-Output "-All `t`t Logs everything, including logs made by the Quest itself"
+    Write-Output "-Custom `t Specify a specific logging pattern, e.g `"custom-types|questui`""
+    Write-Output "`t`t NOTE: The paterent `"AndriodRuntime|CRASH`" is always appended to a custom pattern"
+    Write-Output "-File `t`t Saves the output of the log to the file name given"
 
     exit
 }
 
-$timestamp = Get-Date -Format "MM-dd HH:mm:ss.fff"
 $bspid = adb shell pidof com.beatgames.beatsaber
-$command = "adb logcat -T `"$timestamp`""
+$command = "adb logcat "
 
 if ($all -eq $false) {
-    while ([string]::IsNullOrEmpty($bspid)) {
+    $loops = 0
+    while ([string]::IsNullOrEmpty($bspid) -and $loops -lt 3) {
         Start-Sleep -Milliseconds 100
         $bspid = adb shell pidof com.beatgames.beatsaber
+        $loops += 1
+    }
+
+    if ([string]::IsNullOrEmpty($bspid)) {
+        Write-Output "Could not connect to adb, exiting..."
+        exit 1
     }
 
     $command += "--pid $bspid"
 }
 
-if ($self -eq $true) {
-    $command += " | Select-String -pattern `"(#{id}|AndroidRuntime|CRASH)`""
-} elseif ($custom -ne "") {
-    $pattern = "(" + $custom + "|AndriodRuntime|CRASH)"
+if ($all -eq $false) {
+    $pattern = "("
+    if ($self -eq $true) {
+        $modID = (Get-Content "./mod.json" -Raw | ConvertFrom-Json).id
+        $pattern += "$modID|"
+    }
+    if (![string]::IsNullOrEmpty($custom)) {
+        $pattern += "$custom|"
+    }
+    if ($pattern -eq "(") {
+        $pattern = "(QuestHook|modloader|"
+    }
+    $pattern += "AndroidRuntime|CRASH)"
     $command += " | Select-String -pattern `"$pattern`""
 }
-elseif ($all -eq $false) {
-    $command += " | Select-String -pattern `"(QuestHook|modloader|AndroidRuntime|CRASH)`""
+
+if (![string]::IsNullOrEmpty($file)) {
+    $command += " | Out-File -FilePath $PSScriptRoot\$file"
 }
 
-if ($file -eq $true) {
-    $command += " | Out-File -FilePath $PSScriptRoot\logcat.log"
-}
-
-echo "Logging using Command `"$command`""
+Write-Output "Logging using Command `"$command`""
 Invoke-Expression $command
