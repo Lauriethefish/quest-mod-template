@@ -99,3 +99,8 @@ add_custom_command(TARGET ${COMPILE_ID} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy ${a_file} debug/${file}
         COMMENT "Copy a files for ndk stack")
         endforeach()
+
+# cmake file to let us include arbitrary files in the `workspacefolder/assets` folder.
+# this means asset bundles and images can directly be accessed as if they were a C# array (ArrayW)
+# or other data could be accessed as an std::span or an std::string_view, all of these things will function without copying any data so they save space and time.
+include(assets_include.cmake)
