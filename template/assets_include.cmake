@@ -14,7 +14,7 @@ set(ASSET_HEADER_DATA
 "#pragma once
 
 #include <string_view>
-#include \"beatsaber-hook/shared/utils/typedefs.h\";
+#include \"beatsaber-hook/shared/utils/typedefs.h\"
 
 struct IncludedAsset {
 
