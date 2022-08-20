@@ -23,6 +23,7 @@ struct IncludedAsset {
         array->monitor = nullptr;
         array->bounds = nullptr;
         array->max_length = end - start - 32;
+        *(end - 1)= '\\0';
     }
     
     operator ArrayW<uint8_t>() const {
@@ -71,6 +72,7 @@ if (EXISTS ${ASSETS_DIRECTORY})
             OUTPUT ${PREPENDED_ASSETS_DIR}/${ASSET}
             COMMAND ${CMAKE_COMMAND} -E echo_append "                                " > ${PREPENDED_ASSETS_DIR}/${ASSET}
             COMMAND ${CMAKE_COMMAND} -E cat ${ASSETS_DIRECTORY}/${ASSET} >> ${PREPENDED_ASSETS_DIR}/${ASSET}
+            COMMAND ${CMAKE_COMMAND} -E echo_append " " >> ${PREPENDED_ASSETS_DIR}/${ASSET}
             DEPENDS ${ASSETS_DIRECTORY}/${ASSET}
         )
 
