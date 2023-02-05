@@ -1,13 +1,25 @@
 {
 	"sharedDir": "shared",
 	"dependenciesDir": "extern",
+	"workspace": {
+		"scripts": {
+			"build": ["pwsh ./scripts/build.ps1"],
+			"copy": ["pwsh ./scripts/copy.ps1"],
+			"qmod": ["pwsh ./scripts/build.ps1", "pwsh ./scripts/createqmod.ps1"],
+			"stack": ["pwsh ./scripts/ndk-stack.ps1"],
+			"tomb": ["pwsh ./scripts/pull-tombstone.ps1"],
+			"restart": ["pwsh ./scripts/restart-game.ps1"],
+			"logcat": ["pwsh ./scripts/start-logging.ps1"]
+		}
+	},
 	"info": {
 		"name": "#{name}",
 		"id": "#{id}",
 		"version": "0.1.0",
 		"url": null,
 		"additionalData": {
-			"overrideSoName": "lib#{id}.so"
+			"overrideSoName": "lib#{id}.so",
+			"cmake": true
 		}
 	},
 	"dependencies": [
