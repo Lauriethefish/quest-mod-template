@@ -62,6 +62,17 @@ foreach ($fileName in $modFiles) {
     }
 }
 
+$lateModFiles = $modJson.lateModFiles
+
+foreach ($fileName in $lateModFiles) {
+    if ($useDebug -eq $true) {
+        & adb push build/debug/$fileName /sdcard/Android/data/com.beatgames.beatsaber/files/mods/$fileName
+    } else {
+        & adb push build/$fileName /sdcard/Android/data/com.beatgames.beatsaber/files/mods/$fileName
+    }
+}
+
+
 & $PSScriptRoot/restart-game.ps1
 
 if ($log -eq $true) {
