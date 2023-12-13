@@ -5,7 +5,7 @@
 		"scripts": {
 			"build": ["pwsh ./scripts/build.ps1"],
 			"copy": ["pwsh ./scripts/copy.ps1"],
-			"qmod": ["pwsh ./scripts/build.ps1", "qpm qmod build", "pwsh ./scripts/createqmod.ps1"],
+			"qmod": ["pwsh ./scripts/build.ps1", "pwsh ./scripts/createqmod.ps1"],
 			"stack": ["pwsh ./scripts/ndk-stack.ps1"],
 			"tomb": ["pwsh ./scripts/pull-tombstone.ps1"],
 			"restart": ["pwsh ./scripts/restart-game.ps1"],
