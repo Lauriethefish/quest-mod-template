@@ -5,7 +5,7 @@
 		"scripts": {
 			"build": ["pwsh ./scripts/build.ps1"],
 			"copy": ["pwsh ./scripts/copy.ps1"],
-			"qmod": ["pwsh ./scripts/build.ps1", "pwsh ./scripts/createqmod.ps1"],
+			"qmod": ["pwsh ./scripts/build.ps1", "qpm qmod build", "pwsh ./scripts/createqmod.ps1"],
 			"stack": ["pwsh ./scripts/ndk-stack.ps1"],
 			"tomb": ["pwsh ./scripts/pull-tombstone.ps1"],
 			"restart": ["pwsh ./scripts/restart-game.ps1"],
@@ -24,19 +24,19 @@
 	},
 	"dependencies": [
 		{
+			"id": "scotland2",
+			"versionRange": "^0.1.3",
+			"additionalData": {
+				"includeQmod": false
+			}
+		},
+		{
 			"id": "beatsaber-hook",
-			"versionRange": "^3.8.0",
+			"versionRange": "^4.0.0",
 			"additionalData": {
 				"extraFiles": [
 					"src/inline-hook"
 				]
-			}
-		},
-		{
-			"id": "modloader",
-			"versionRange": "=1.2.3",
-			"additionalData": {
-				
 			}
 		}
 	],
