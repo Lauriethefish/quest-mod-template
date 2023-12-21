@@ -9,7 +9,7 @@
   "packageVersion": "1.22.0",
   "description": "#{description}",
   "dependencies": [],
-  "modFiles": [],
+  "modFiles": ["${binary}"],
   "libraryFiles": [],
   "fileCopies": []
 }
