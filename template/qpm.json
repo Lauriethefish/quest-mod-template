@@ -32,7 +32,7 @@
 		},
 		{
 			"id": "beatsaber-hook",
-			"versionRange": "^4.0.0",
+			"versionRange": "^5.0.0",
 			"additionalData": {
 				"extraFiles": [
 					"src/inline-hook"
