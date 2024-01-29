@@ -10,7 +10,7 @@
   "modloader": "Scotland2",
   "description": "#{description}",
   "dependencies": [],
-  "modFiles": [],
+  "modFiles": ["${binary}"],
   "libraryFiles": [],
   "fileCopies": []
 }
