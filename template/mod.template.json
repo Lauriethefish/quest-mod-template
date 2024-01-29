@@ -6,11 +6,12 @@
   "author": "#{author}",
   "version": "0.1.0",
   "packageId": "com.beatgames.beatsaber",
-  "packageVersion": "1.22.0",
+  "packageVersion": "1.34.2_7115288407",
   "modloader": "Scotland2",
   "description": "#{description}",
   "dependencies": [],
-  "modFiles": ["${binary}"],
+  "modFiles": [],
+  "lateModFiles": ["${binary}"],
   "libraryFiles": [],
   "fileCopies": []
 }
