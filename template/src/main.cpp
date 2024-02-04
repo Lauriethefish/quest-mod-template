@@ -16,7 +16,7 @@ Logger& getLogger() {
 }
 
 // Called at the early stages of game loading
-MODLOADER_FUNC void setup(CModInfo& info) {
+MOD_EXPORT void setup(CModInfo& info) noexcept {
     info.id = modInfo.id.c_str();
     info.version = modInfo.version.c_str();
     info.version_long = modInfo.versionLong;
@@ -26,7 +26,7 @@ MODLOADER_FUNC void setup(CModInfo& info) {
 }
 
 // Called at unity initialization - a good time to install function hooks or create unity objects
-MODLOADER_FUNC void late_load() {
+MOD_EXPORT void late_load() noexcept {
     il2cpp_functions::Init();
 
     getLogger().info("Installing hooks...");
