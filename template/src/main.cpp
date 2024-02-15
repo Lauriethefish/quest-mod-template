@@ -15,11 +15,9 @@ Logger& getLogger() {
     return *logger;
 }
 
-// Called at the early stages of game loading
-MOD_EXPORT void setup(CModInfo& info) noexcept {
-    info.id = modInfo.id.c_str();
-    info.version = modInfo.version.c_str();
-    info.version_long = modInfo.versionLong;
+// Called after our mod is opened, before late_load
+MOD_EXPORT void setup(CModInfo* info) noexcept {
+    *info = modInfo.to_c();
 
     getConfig().Load();
     getLogger().info("Completed setup!");
