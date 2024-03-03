@@ -39,7 +39,7 @@ add_compile_definitions(MOD_ID="${CMAKE_PROJECT_NAME}")
 add_compile_definitions(VERSION="${CMAKE_PROJECT_VERSION}")
 
 add_compile_options(-frtti -fexceptions -fvisibility=hidden -fPIE -fPIC)
-add_compile_options(-O3)
+
 
 # stop symbols leaking
 add_link_options(-Wl, --exclude-libs, ALL)
