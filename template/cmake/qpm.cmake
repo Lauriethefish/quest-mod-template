@@ -1,0 +1,28 @@
+include_guard()
+
+# Necessary for extern.cmake
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/utils.cmake)
+
+
+# read in information about the mod from qpm.json
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/qpm.json PACKAGE_JSON)
+
+string(JSON PACKAGE_INFO GET ${PACKAGE_JSON} info)
+
+string(JSON PACKAGE_NAME GET ${PACKAGE_INFO} name)
+string(JSON PACKAGE_ID GET ${PACKAGE_INFO} id)
+string(JSON PACKAGE_VERSION GET ${PACKAGE_INFO} version)
+
+message(STATUS "PACKAGE NAME: ${PACKAGE_NAME}")
+message(STATUS "PACKAGE VERSION: ${PACKAGE_VERSION}")
+
+string(JSON EXTERN_DIR_NAME GET ${PACKAGE_JSON} dependenciesDir)
+string(JSON SHARED_DIR_NAME GET ${PACKAGE_JSON} sharedDir)
+
+set(EXTERN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${EXTERN_DIR_NAME})
+set(SHARED_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${SHARED_DIR_NAME})
+
+set(COMPILE_ID ${CMAKE_PROJECT_NAME})
+
+# TODO: Setup qpm extern from toolchain
+include(${CMAKE_CURRENT_SOURCE_DIR}/extern.cmake)

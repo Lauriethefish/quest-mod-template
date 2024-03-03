@@ -1,1 +1,1 @@
-#{ndkpath}
+E:\SSDUse\AppData\Android\SDK\ndk\android-ndk-r27-canary

@@ -46,6 +46,19 @@ foreach ($mod in $modJson.modFiles) {
     $filelist += $path
 }
 
+foreach ($mod in $modJson.lateModFiles) {
+    $path = "./build/" + $mod
+    if (-not (Test-Path $path)) {
+        $path = "./extern/libs/" + $mod
+    }
+    if (-not (Test-Path $path)) {
+        Write-Output "Error: could not find dependency: $path"
+        exit 1
+    }
+    $filelist += $path
+}
+
+
 foreach ($lib in $modJson.libraryFiles) {
     $path = "./build/" + $lib
     if (-not (Test-Path $path)) {

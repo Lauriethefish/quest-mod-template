@@ -1,6 +1,6 @@
 Param(
     [Parameter(Mandatory=$false)]
-    [String] $logName = "log.log",
+    [String] $logName = "RecentCrash.log",
 
     [Parameter(Mandatory=$false)]
     [Switch] $help

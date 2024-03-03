@@ -1,4 +1,3 @@
-# Ignore clangd cache
 .cache/
 
 # Prerequisites
