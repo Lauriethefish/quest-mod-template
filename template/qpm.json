@@ -1,14 +1,14 @@
 {
   "sharedDir": "shared",
   "dependenciesDir": "extern",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "info": {
-    "name": "TestMod",
-    "id": "testmod",
+    "name": "#{name}",
+    "id": "#{id}",
     "version": "0.1.0",
     "url": null,
     "additionalData": {
-      "overrideSoName": "libtestmod.so",
+      "overrideSoName": "lib#{id}.so",
       "cmake": true
     }
   },
