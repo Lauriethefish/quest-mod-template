@@ -16,6 +16,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 project(#{id}
         VERSION ${PACKAGE_VERSION})
+# Set COMPILE_ID for qpm purposes
+set(COMPILE_ID ${CMAKE_PROJECT_NAME})
 
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -46,7 +48,6 @@ add_link_options(-Wl, --exclude-libs, ALL)
 # Build options must be set at end
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/release.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/debug.cmake)
-
 
 # TODO: Setup qpm extern from toolchain
 # Must be set at end
