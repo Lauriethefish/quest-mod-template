@@ -24,5 +24,3 @@ set(SHARED_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${SHARED_DIR_NAME})
 
 set(COMPILE_ID ${CMAKE_PROJECT_NAME})
 
-# TODO: Setup qpm extern from toolchain
-include(${CMAKE_CURRENT_SOURCE_DIR}/extern.cmake)
