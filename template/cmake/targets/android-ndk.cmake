@@ -35,7 +35,7 @@ set(ANDROID_STL c++_static)
 set(ANDROID_USE_LEGACY_TOOLCHAIN_FILE OFF)
 
 #TODO: Fix this warning
-if(DEFINED CMAKE_TOOLCHAIN_FILE)
+if(CMAKE_TOOLCHAIN_FILE MATCHES ".+")
     message(WARNING "CMAKE_TOOLCHAIN_FILE already defined, overwriting! ${CMAKE_TOOLCHAIN_FILE}")
 endif()
 
