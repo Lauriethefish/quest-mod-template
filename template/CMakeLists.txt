@@ -6,6 +6,9 @@ option(QUEST "Build for quest" ON)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/utils.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/qpm.cmake)
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/release.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/debug.cmake)
+
 if(QUEST)
         include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/targets/quest.cmake)
 endif()
@@ -48,8 +51,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SHARED_DIR})
 
 
 # Build options must be set at end
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/release.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/debug.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/strip.cmake)
 
 # TODO: Setup qpm extern from toolchain
 # Must be set at end
