@@ -3,13 +3,14 @@
   "_QPVersion": "0.1.1",
   "name": "${mod_name}",
   "id": "${mod_id}",
-  "author": "#{author}",
+  "author": "Fernthedev",
   "version": "0.1.0",
   "packageId": "com.beatgames.beatsaber",
   "packageVersion": "1.22.0",
-  "description": "#{description}",
+  "description": "Test mod thing",
   "dependencies": [],
   "modFiles": ["${binary}"],
+
   "libraryFiles": [],
   "fileCopies": []
 }
