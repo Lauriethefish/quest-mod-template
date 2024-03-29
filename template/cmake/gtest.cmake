@@ -1,5 +1,8 @@
 include_guard()
 
+message("Compiling with GTest")
+
+# GTest
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -12,25 +15,29 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# recursively get all src files
-RECURSE_FILES(cpp_test_file_list ${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp)
-RECURSE_FILES(c_test_file_list ${CMAKE_CURRENT_SOURCE_DIR}/test/*.c)
+# Run at end to link with project
+cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL _setup_gtest_project())
 
-add_executable(
-    ${PROJECT_NAME}_test
-    ${cpp_test_file_list}
-    ${c_test_file_list}
-)
-target_link_libraries(
-    ${PROJECT_NAME}_test
-    PRIVATE ${PROJECT_NAME}
-    GTest::gtest_main
-)
+function(_setup_gtest_project)
+    # recursively get all src files
+    RECURSE_FILES(cpp_test_file_list ${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp)
+    RECURSE_FILES(c_test_file_list ${CMAKE_CURRENT_SOURCE_DIR}/test/*.c)
 
-target_include_directories(${PROJECT_NAME}_test PRIVATE ${INCLUDE_DIR})
-target_include_directories(${PROJECT_NAME}_test PRIVATE ${SHARED_DIR})
-target_include_directories(${PROJECT_NAME}_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/test)
+    add_executable(
+        ${PROJECT_NAME}_test
+        ${cpp_test_file_list}
+        ${c_test_file_list}
+    )
+    target_link_libraries(
+        ${PROJECT_NAME}_test
+        PRIVATE ${PROJECT_NAME}
+        GTest::gtest_main
+    )
 
-include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}_test)
+    target_include_directories(${PROJECT_NAME}_test PRIVATE ${INCLUDE_DIR})
+    target_include_directories(${PROJECT_NAME}_test PRIVATE ${SHARED_DIR})
+    target_include_directories(${PROJECT_NAME}_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/test)
 
+    include(GoogleTest)
+    gtest_discover_tests(${PROJECT_NAME}_test)
+endfunction(_setup_gtest_project)

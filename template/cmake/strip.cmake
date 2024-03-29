@@ -1,14 +1,9 @@
-include_guard()
+# Run at end to link with project
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL _setup_linux_strip_project())
+endif()
 
-if(${CMAKE_BUILD_TYPE} STREQUAL "RELEASE" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel")
-    # Better optimizations
-    add_compile_options(-O3)
-    
-    # LTO
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-    add_compile_options(-flto)
-
-
+function(_setup_linux_strip_project)
     # Strip debug symbols
     add_custom_command(TARGET ${COMPILE_ID} POST_BUILD
         COMMAND ${CMAKE_STRIP} -d --strip-all
@@ -23,9 +18,11 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "RELEASE" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWi
         COMMAND ${CMAKE_COMMAND} -E rename lib${COMPILE_ID}.so debug/lib${COMPILE_ID}.so
         COMMENT "Rename the lib to debug_ since it has debug symbols"
     )
+
     # strip debug symbols from the .so and all dependencies
     add_custom_command(TARGET ${COMPILE_ID} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E rename stripped_lib${COMPILE_ID}.so lib${COMPILE_ID}.so
         COMMENT "Rename the stripped lib to regular"
     )
-endif()
+endfunction(_setup_linux_strip_project)
+

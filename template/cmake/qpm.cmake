@@ -25,3 +25,9 @@ set(SHARED_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${SHARED_DIR_NAME})
 # TODO: This is empty by the time this is called
 set(COMPILE_ID ${CMAKE_PROJECT_NAME})
 
+# Setup QPM Extern
+# TODO: Setup qpm extern from toolchain
+cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL _setup_qpm_project())
+function(_setup_qpm_project)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/extern.cmake)
+endfunction(_setup_qpm_project)
