@@ -10,22 +10,29 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-
 add_compile_definitions(MOD_ID="${CMAKE_PROJECT_NAME}")
 add_compile_definitions(VERSION="${CMAKE_PROJECT_VERSION}")
 
 add_compile_options(-frtti -fexceptions -fvisibility=hidden -fPIE -fPIC)
 
-
 # Include
-
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/utils.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/qpm.cmake)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/release.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/debug.cmake)
+if(${CMAKE_BUILD_TYPE} STREQUAL "RELEASE" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel")
+        # Better optimizations
+        add_compile_options(-O3)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/builds/strip.cmake)
+        # LTO
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+        add_compile_options(-flto)
+endif()
+
+if(${CMAKE_BUILD_TYPE} STREQUAL "DEBUG" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo")
+        add_compile_options(-g)
+endif()
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/strip.cmake)
 
 if(QUEST)
         include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/targets/quest.cmake)
@@ -34,12 +41,11 @@ endif()
 # stop symbols leaking
 # TODO: Fix
 # add_link_options(-Wl, --exclude-libs, ALL)
-
-project(#{id}
+project( # {id}
         VERSION ${PACKAGE_VERSION})
+
 # Set COMPILE_ID for qpm purposes
 set(COMPILE_ID ${CMAKE_PROJECT_NAME})
-
 
 # recursively get all src files
 RECURSE_FILES(cpp_file_list ${SOURCE_DIR}/*.cpp)
@@ -54,6 +60,3 @@ add_library(
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SHARED_DIR})
-
-
-
