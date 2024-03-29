@@ -15,7 +15,7 @@ Configuration &getConfig() {
 }
 
 // Called at the early stages of game loading
-MOD_EXPORT void setup(CModInfo *info) noexcept {
+MOD_EXTERN_FUNC void setup(CModInfo *info) noexcept {
   *info = modInfo.to_c();
 
   getConfig().Load();
@@ -27,7 +27,7 @@ MOD_EXPORT void setup(CModInfo *info) noexcept {
 }
 
 // Called later on in the game loading - a good time to install function hooks
-MOD_EXPORT void late_load() noexcept {
+MOD_EXTERN_FUNC void late_load() noexcept {
   il2cpp_functions::Init();
 
   PaperLogger.info("Installing hooks...");
