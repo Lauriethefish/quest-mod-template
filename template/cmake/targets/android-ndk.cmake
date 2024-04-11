@@ -1,8 +1,8 @@
 include_guard()
 
 if(NOT DEFINED CMAKE_ANDROID_NDK)
-    if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/ndkpath.txt")
-        file(STRINGS "ndkpath.txt" CMAKE_ANDROID_NDK)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ndkpath.txt")
+        file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/ndkpath.txt" CMAKE_ANDROID_NDK)
     else()
         if(EXISTS $ENV{ANDROID_NDK_HOME})
             set(CMAKE_ANDROID_NDK $ENV{ANDROID_NDK_HOME})
