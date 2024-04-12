@@ -55,6 +55,7 @@ if ($all -eq $false) {
 if ($all -eq $false) {
     $pattern = "("
     if ($self -eq $true) {
+        & $PSScriptRoot/validate-modjson.ps1
         $modID = (Get-Content "./mod.json" -Raw | ConvertFrom-Json).id
         $pattern += "$modID|"
     }
@@ -62,9 +63,9 @@ if ($all -eq $false) {
         $pattern += "$custom|"
     }
     if ($pattern -eq "(") {
-        $pattern = "(QuestHook|modloader|"
+        $pattern = "( INFO| DEBUG| WARN| ERROR| CRITICAL|"
     }
-    $pattern += "AndroidRuntime|CRASH)"
+    $pattern += "AndroidRuntime|CRASH|scotland2|Unity  )"
     $command += " | Select-String -pattern `"$pattern`""
 }
 
@@ -73,4 +74,5 @@ if (![string]::IsNullOrEmpty($file)) {
 }
 
 Write-Output "Logging using Command `"$command`""
+adb logcat -c
 Invoke-Expression $command

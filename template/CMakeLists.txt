@@ -58,6 +58,9 @@ add_library(
         ${c_file_list}
 )
 
+# for inline hook
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE -llog)
+
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SHARED_DIR})
 
