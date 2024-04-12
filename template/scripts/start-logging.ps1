@@ -27,7 +27,7 @@ if ($help -eq $true) {
     Write-Output "-Self `t`t Only Logs your mod and Crashes"
     Write-Output "-All `t`t Logs everything, including logs made by the Quest itself"
     Write-Output "-Custom `t Specify a specific logging pattern, e.g `"custom-types|questui`""
-    Write-Output "`t`t NOTE: The paterent `"AndriodRuntime|CRASH`" is always appended to a custom pattern"
+    Write-Output "`t`t NOTE: The pattern `"AndroidRuntime|CRASH|scotland2|Unity`" is always appended to a custom pattern"
     Write-Output "-File `t`t Saves the output of the log to the file name given"
 
     exit
