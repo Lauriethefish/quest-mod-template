@@ -18,7 +18,7 @@ if ($help -eq $true) {
 # if user specified clean, remove all build files
 if ($clean.IsPresent) {
     if (Test-Path -Path "build") {
-        remove-item build -R
+        remove-item build -R -Force 
     }
 }
 
