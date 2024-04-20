@@ -19,7 +19,7 @@
       ],
       "clean": ["pwsh ./scripts/build.ps1 -clean"],
       "copy": [
-        "pwsh ./scripts/copy.ps1"
+        "pwsh ./scripts/copy.ps1 $0:?"
       ],
       "logcat": [
         "pwsh ./scripts/start-logging.ps1"
