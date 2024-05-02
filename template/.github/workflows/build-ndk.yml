@@ -1,0 +1,120 @@
+name: NDK build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+    branches:
+      - 'master'
+      - 'main'
+      - 'dev/*'
+      - 'feat/*'
+      - 'fix/*'
+    paths-ignore:
+      - '**.yml'
+      - '!.github/workflows/build-ndk.yml'
+      - '**.json'
+      - '!qpm.json'
+      - '!qpm.shared.json'
+      - '!mod.template.json'
+      - '**.txt'
+      - '!CMakeLists.txt'
+      - '**.ps1'
+      - '!build.ps1'
+      - '!createqmod.ps1'
+      - '**.md'
+      - '.gitignore'
+  pull_request:
+    branches:
+        - 'master'
+        - 'main'
+        - 'dev/*'
+        - 'feat/*'
+        - 'fix/*'
+
+env:
+    module_id: "#{id}"
+    qmod_name: "#{name}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout
+      with:
+        submodules: true
+        lfs: true
+
+    - uses: seanmiddleditch/gha-setup-ninja@v3
+
+    # Use canary NDK to avoid lesser known compile bugs
+    - name: Setup canary NDK
+      id: setup-ndk
+      uses: ./.github/actions/canary-ndk
+
+    - name: Create ndkpath.txt
+      run: |
+        echo ${{ steps.setup-ndk.outputs.ndk-path }} > ${GITHUB_WORKSPACE}/ndkpath.txt
+        cat ${GITHUB_WORKSPACE}/ndkpath.txt
+
+    # get version from pushed tag
+    - name: Extract version
+      if: startsWith(github.ref, 'refs/tags/v')
+      id: version
+      run: |
+        echo "TAG=${GITHUB_REF#refs/tags/}" >> ${GITHUB_OUTPUT}
+        echo "VERSION=${GITHUB_REF#refs/tags/v}" >> ${GITHUB_OUTPUT}
+
+    - name: Setup qpm
+      uses: Fernthedev/qpm-action@main
+      with:
+        workflow_token: ${{ secrets.GITHUB_TOKEN }}
+        restore: true
+        cache: true
+        publish: false
+
+    - name: Build & Create Qmod
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        qpm s qmod
+
+    - name: Get Library Name
+      id: libname
+      run: |
+        cd ./build/
+        pattern="lib${module_id}*.so"
+        files=( $pattern )
+        echo "NAME=${files[0]}" >> ${GITHUB_OUTPUT}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ steps.libname.outputs.NAME }}
+        path: ./build/${{ steps.libname.outputs.NAME }}
+        if-no-files-found: error
+
+    - name: Upload qmod artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{env.qmod_name}}.qmod
+        path: ./${{ env.qmod_name }}.qmod
+        if-no-files-found: error
+
+    # if we had a tag, we should make a release
+    - name: Upload release artifacts
+      if: startsWith(github.ref, 'refs/tags/v')
+      id: upload_file_release
+      uses: softprops/action-gh-release@v0.1.15
+      with:
+        tag_name: ${{ github.event.inputs.version }}
+        draft: true
+        generate_release_notes: true
+        files: |
+          ./build/${{ steps.libname.outputs.NAME }}
+          ./build/debug_${{ steps.libname.outputs.NAME }}
+          ./${{ env.qmod_name }}.qmod
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
