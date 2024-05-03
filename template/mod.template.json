@@ -6,10 +6,11 @@
   "author": "#{author}",
   "version": "0.1.0",
   "packageId": "com.beatgames.beatsaber",
-  "packageVersion": "1.22.0",
+  "packageVersion": "1.35.0_8016709773",
   "description": "#{description}",
   "dependencies": [],
   "modFiles": ["${binary}"],
+
   "libraryFiles": [],
   "fileCopies": []
 }
