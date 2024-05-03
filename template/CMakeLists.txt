@@ -15,7 +15,7 @@ add_compile_definitions(VERSION="${CMAKE_PROJECT_VERSION}")
 
 add_compile_options(-frtti -fexceptions -fvisibility=hidden -fPIE -fPIC)
 
-# Include
+# Include. Include order matters!
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/utils.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/qpm.cmake)
 
@@ -32,11 +32,13 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "DEBUG" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWith
         add_compile_options(-g)
 endif()
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/strip.cmake)
-
+# Targets
 if(QUEST)
         include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/targets/quest.cmake)
 endif()
+
+# Post build
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/strip.cmake)
 
 # stop symbols leaking
 # TODO: Fix
