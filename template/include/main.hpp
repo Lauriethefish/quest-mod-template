@@ -21,4 +21,4 @@
 // log information from other files
 Configuration &getConfig();
 
-constexpr auto PaperLogger = Paper::ConstLoggerContext("#{id}");
+inline constexpr auto PaperLogger = Paper::ConstLoggerContext("#{id}");
