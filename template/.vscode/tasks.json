@@ -40,7 +40,7 @@
             "label": "Build",
             "detail": "Builds the library",
             "type": "shell",
-            "command": "./scripts/build.ps1",
+            "command": "qpm s build",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -54,7 +54,18 @@
             "label": "Build (Clean)",
             "detail": "Builds the library from a clean state",
             "type": "shell",
-            "command": "./scripts/build.ps1 -clean",
+            "command": "qpm s clean",
+            "group": "build",
+            "options": {
+                "env": {}
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Rebuild",
+            "detail": "Builds the library from a clean state with cleared dependencies",
+            "type": "shell",
+            "command": "qpm s rebuild",
             "group": "build",
             "options": {
                 "env": {}
@@ -65,7 +76,7 @@
             "label": "Copy",
             "detail": "Builds and copies the library to the Quest using ADB and force-quits Beat Saber",
             "type": "shell",
-            "command": "./scripts/copy.ps1",
+            "command": "qpm s copy",
             "group": "build",
             "options": {
                 "env": {}
@@ -75,19 +86,43 @@
             "label": "Start Logging",
             "detail": "Begin logging from the Quest to the console",
             "type": "shell",
-            "command": "./scripts/start-logging.ps1",
+            "command": "qpm s logcat",
         },
         {
             "label": "Start logging to file",
             "detail": "Begin logging from the Quest to the console and saving output to a file 'logcat.log'",
             "type": "shell",
-            "command": "./scripts/start-logging.ps1 --file",
+            "command": "qpm s logcat -- --file",
         },
         {
             "label": "Build QMOD",
             "detail": "Builds a .qmod to be installed into BMBF or QuestPatcher",
             "type": "shell",
-            "command": "./scripts/build.ps1 && ./scripts/createqmod.ps1",
+            "command": "qpm s qmod",
+            "args": [],
+            "group": "build",
+            "options": {
+                "env": {}
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build QMOD (Clean)",
+            "detail": "Builds a .qmod from a clean state to be installed into BMBF or QuestPatcher",
+            "type": "shell",
+            "command": "qpm s clean-qmod",
+            "args": [],
+            "group": "build",
+            "options": {
+                "env": {}
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Rebuild QMOD",
+            "detail": "Builds a .qmod from a cleaned state with cleared dependencies to be installed into BMBF or QuestPatcher",
+            "type": "shell",
+            "command": "qpm s rebuild-qmod",
             "args": [],
             "group": "build",
             "options": {
@@ -99,21 +134,28 @@
             "label": "Restart Beat Saber",
             "detail": "Force-quits and restarts Beat Saber on the Quest",
             "type": "shell",
-            "command": "./scripts/restart-game.ps1",
+            "command": "qpm s restart",
             "problemMatcher": []
         },
         {
             "label": "Process Stack",
             "detail": "Processes a tombstone using the debug .so to find file locations",
             "type": "shell",
-            "command": "./scripts/ndk-stack.ps1",
+            "command": "qpm s stack",
             "problemMatcher": []
         },
         {
             "label": "Pull Tombstone",
             "detail": "Finds and pulls the most recent tombstone from your quest",
             "type": "shell",
-            "command": "./scripts/pull-tombstone.ps1",
+            "command": "qpm s tomb",
+            "problemMatcher": []
+        },
+        {
+            "label": "Deep Clean",
+            "detail": "Clears dependencies and cleans the build path",
+            "type": "shell",
+            "command": "qpm s deepclean",
             "problemMatcher": []
         }
     ]
