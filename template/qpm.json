@@ -18,6 +18,22 @@
         "pwsh ./scripts/build.ps1"
       ],
       "clean": ["pwsh ./scripts/build.ps1 -clean"],
+      "clean-qmod": [
+        "qpm s clean",
+        "qpm s qmod"
+      ],
+      "deepclean": [
+        "pwsh ./scripts/build.ps1 -clean -skipBuild",
+        "qpm clear"
+      ],
+      "rebuild": [
+        "qpm s deepclean",
+        "qpm s build"
+      ],
+      "rebuild-qmod": [
+        "qpm s deepclean",
+        "qpm s qmod"
+      ],
       "copy": [
         "pwsh ./scripts/copy.ps1 $0:?"
       ],

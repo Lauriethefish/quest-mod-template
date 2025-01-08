@@ -16,6 +16,8 @@ if ($help -eq $true) {
 }
 
 $mod = "./mod.json"
+$sharedQpmFilePath = "qpm.shared.json"
+$defaultQpmFilePath = "qpm.json"
 
 & $PSScriptRoot/validate-modjson.ps1
 if ($LASTEXITCODE -ne 0) {
@@ -23,8 +25,18 @@ if ($LASTEXITCODE -ne 0) {
 }
 $modJson = Get-Content $mod -Raw | ConvertFrom-Json
 
+# Check if qpm.shared.json exists, otherwise fallback to qpm.json
+if (Test-Path $sharedQpmFilePath) {
+    $qpmJson = (Get-Content $sharedQpmFilePath | ConvertFrom-Json).config
+} elseif (Test-Path $defaultQpmFilePath) {
+    $qpmJson = Get-Content $defaultQpmFilePath | ConvertFrom-Json
+} else {
+    Write-Error "Neither qpm.shared.json nor qpm.json exists."
+    exit 1
+}
+
 if ($qmodName -eq "") {
-    $qmodName = $modJson.name
+    $qmodName = $qpmJson.workspace.qmodOutput
 }
 
 $filelist = @($mod)
@@ -71,8 +83,8 @@ foreach ($lib in $modJson.libraryFiles) {
     $filelist += $path
 }
 
-$zip = $qmodName + ".zip"
-$qmod = $qmodName + ".qmod"
+$zip = [guid]::NewGuid().ToString() + ".zip"
+$qmod = $qmodName
 
 Compress-Archive -Path $filelist -DestinationPath $zip -Update
 Move-Item $zip $qmod -Force
