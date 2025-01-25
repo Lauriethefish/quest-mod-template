@@ -34,14 +34,15 @@ if(QUEST)
         include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/targets/quest.cmake)
 endif()
 
+project( #{id}
+        VERSION ${PACKAGE_VERSION})
+
 # Post build
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/strip.cmake)
 
 # stop symbols leaking
 # TODO: Fix
 # add_link_options(-Wl, --exclude-libs, ALL)
-project( #{id}
-        VERSION ${PACKAGE_VERSION})
 
 add_compile_definitions(MOD_ID="${CMAKE_PROJECT_NAME}")
 add_compile_definitions(VERSION="${CMAKE_PROJECT_VERSION}")
