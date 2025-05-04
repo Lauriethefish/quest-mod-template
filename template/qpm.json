@@ -44,7 +44,7 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^5.0.0",
+      "versionRange": "^6.0.0",
       "additionalData": {}
     },
     {
@@ -55,8 +55,8 @@
       }
     },
     {
-      "id": "paper",
-      "versionRange": "^3.0.0",
+      "id": "paper2_scotland2",
+      "versionRange": "^4.0.0",
       "additionalData": {}
     }
   ]

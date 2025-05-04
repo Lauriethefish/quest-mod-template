@@ -13,7 +13,7 @@
 #include "beatsaber-hook/shared/utils/logging.hpp"
 
 
-#include "paper/shared/logger.hpp"
+#include "paper2_scotland2/shared/logger.hpp"
 
 #include "_config.hpp"
 
