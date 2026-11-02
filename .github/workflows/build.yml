@@ -1,0 +1,30 @@
+name: Build Mod
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up ndk
+      uses: android-actions/setup-android-ndk@v1
+      with:
+        ndk-version: r25c
+
+    - name: Compile Code
+      run: |
+        find . -name "Android.mk" -execdir ndk-build \;
+
+    - name: Package Qmod File
+      run: |
+        zip -r bat-cheat-mod.qmod . -i "*.so" -i "*.json"
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: qmod-artifact
+        path: bat-cheat-mod.qmod
